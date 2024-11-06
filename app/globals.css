@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optionale zusätzliche Stile */
+body {
+  @apply bg-gray-50;
+}
+
+/* Fügen Sie hier weitere benutzerdefinierte Stile hinzu */
+.pokemon-card {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.pokemon-card:hover {
+  @apply transform scale-105;
+}
+
+/* Verbesserte Typografie */
+h1 {
+  @apply text-4xl font-bold text-gray-800;
+}
+
+/* Verbesserte Button-Stile */
+.btn {
+  @apply px-4 py-2 rounded-lg transition-colors duration-200;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white hover:bg-blue-600;
+}
+
+/* Verbesserte Karten-Stile */
+.card {
+  @apply bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-200;
+}
