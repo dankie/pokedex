@@ -17,8 +17,9 @@ export default function Home() {
   useEffect(() => {
     if (router.isReady) {
       setPage(Number(router.query.page) || 1);
+      setSearchQuery(router.query.searchQuery as string || '');
     }
-  }, [router.isReady, router.query.page]);
+  }, [router.isReady, router.query.page, router.query.searchQuery]);
 
   const { data, error, isLoading } = useSWR(
     searchQuery.length >= 3
@@ -60,15 +61,19 @@ export default function Home() {
           {data?.results?.length === 0 ? (
             <div className="col-span-full text-center py-8 text-gray-500">
               Pokémon out of range <br />
-              <Link
-                href={{
-                  pathname: '/',
-                  query: { page: 1 }
+              <button
+                onClick={() => {
+                  setPage(1);
+                  setSearchQuery('');
+                  router.push({
+                    pathname: '/',
+                    query: { page: 1 }
+                  }, undefined, { shallow: true });
                 }}
                 className="text-blue-500 hover:text-blue-700"
               >
                 ← Back
-              </Link>
+              </button>
             </div>
           ) : (
             data?.results?.map((pokemon: PokemonListItem) => (

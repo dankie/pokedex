@@ -23,7 +23,7 @@ export default async function handler(
             pokemon.name.toLowerCase().includes(searchQuery.toLowerCase())
           )};
           if (filtered.results.length === 0) {
-            return res.status(400).json({ error: 'Pokemon not found' });
+            return res.status(400).json({ results: [], error: 'Pokemon not found' });
           }
           return res.status(200).json(filtered);
         } else if (searchQuery && searchQuery.length < 3) {
