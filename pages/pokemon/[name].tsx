@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useCallback } from 'react';
 
 import '@/app/globals.css';
 
@@ -11,6 +12,10 @@ export default function PokemonPage() {
   const { data: pokemon, error, isLoading } = useSWR(
     name ? `/api/pokemon/${name}` : null
   );
+
+  const handleBack = useCallback(() => {
+    router.back();
+  }, [router]);
 
   if (error) return (
     <div className="container mx-auto px-4 py-8 text-center text-red-500">
@@ -44,15 +49,12 @@ export default function PokemonPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6 relative">
-        <Link
-          href={{
-            pathname: '/',
-            query: { page: router.query.page }
-          }}
+        <button
+          onClick={handleBack}
           className="absolute left-6 top-6 text-blue-500 hover:text-blue-700"
         >
           ← Back
-        </Link>
+        </button>
 
         <img
           alt={pokemon.name}

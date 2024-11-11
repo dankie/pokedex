@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { getPokemonDetails } from '@/services/pokemonApi';
 import { PokemonDetails } from '@/types/pokemon';
 import { PokemonListItem } from '@/types/pokemon';
-import { useRouter } from 'next/router';
 
 interface PokemonCardProps {
   pokemon: PokemonListItem;
@@ -12,7 +11,6 @@ interface PokemonCardProps {
 
 export default function PokemonCard({ pokemon }: PokemonCardProps) {
   const [details, setDetails] = useState<PokemonDetails | null>(null);
-  const router = useRouter();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -25,7 +23,7 @@ export default function PokemonCard({ pokemon }: PokemonCardProps) {
   if (!details) return <div>Loading...</div>;
 
   return (
-    <Link href={`/pokemon/${pokemon.name}?page=${router.query.page}`}>
+    <Link href={`/pokemon/${pokemon.name}`}>
       <div className="border rounded-lg p-4 hover:shadow-lg transition-shadow">
         <img
           src={details.sprites.front_default}
